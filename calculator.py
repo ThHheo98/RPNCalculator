@@ -1,4 +1,9 @@
-class PRNStack:
+class RPNStack:
+    """
+    This class represents a stack to which operands are added.
+    It implements usual stack methods and a method to evaluate a RPN expression.
+    """
+
     operators = {
         "+": (lambda a, b: a + b),
         "-": (lambda a, b: a - b),
@@ -21,24 +26,29 @@ class PRNStack:
         return self.items.pop()
 
     def evaluateExpression(self, expression):
+        """
+        Operands are added to a stack and when an operator is found, the last 2 operands are popped
+        from the stack and the result is pushed back onto the stack.
+
+        :param expression: string given as input from the user, that represents a RPN expression
+        :return: the evaluation of the expression given or 0 if the expression is misspelled
+        """
         tokenList = expression.split(" ")
 
         for token in tokenList:
-            # Check is the token is an operator or an operand!
-            if token in PRNStack.operators:
+
+            if token in RPNStack.operators:
                 op2 = self.pop()
                 op1 = self.pop()
-                result = PRNStack.operators[token](op1, op2)
+                result = RPNStack.operators[token](op1, op2)
                 self.push(result)
-            else:  # Toke is an Operand
+            else:
                 try:
                     token = int(token)
                 except ValueError as e:
                     self.somethingWrong = True
                     return 0
                 self.push(token)
-
-        print(self.items)
         return self.pop()
 
 
@@ -49,7 +59,7 @@ if __name__ == '__main__':
 
     try:
         while True:
-            stack = PRNStack()
+            stack = RPNStack()
             expression = input(">")
             if expression == 'q':
                 exit(0)

@@ -1,9 +1,14 @@
 import unittest
-from calculator import PRNStack
+from calculator import RPNStack
 
 class PRNStackTests(unittest.TestCase):
+
+    """
+    Testing of the calculator.
+    """
+
     def setUp(self) -> None:
-        self.calc = PRNStack()
+        self.calc = RPNStack()
 
     def test_evaluate(self):
         """Test evaluate method"""
