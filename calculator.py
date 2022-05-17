@@ -64,7 +64,6 @@ if __name__ == '__main__':
             if expression == 'q':
                 exit(0)
             result = stack.evaluateExpression(expression=expression)
-            print(stack.items)
             if stack.somethingWrong:
                 print("You mistyped your expression, try again!")
             elif not stack.isEmpty():
